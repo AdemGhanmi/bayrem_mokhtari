@@ -1,3 +1,7 @@
 <?php
 
-echo 'PHP VERCEL WORKS';
+require __DIR__ . '/../vendor/autoload.php';
+
+$app = require __DIR__ . '/../bootstrap/app.php';
+
+echo 'BOOTSTRAP OK';
