@@ -7,6 +7,14 @@
   },
   "routes": [
     {
+      "src": "/(css|js|images|logos|fonts|assets)/(.*)",
+      "dest": "/public/$1/$2"
+    },
+    {
+      "src": "/(.*)\\.(css|js|png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf)$",
+      "dest": "/public/$1.$2"
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/index.php"
     }
