@@ -6,7 +6,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 
-return Application::configure(basePath: dirname(__DIR__))
+$app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
@@ -21,6 +21,14 @@ return Application::configure(basePath: dirname(__DIR__))
             fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
     })
-    ->create()
-    ->useStoragePath('/tmp/laravel-storage')
-    ->useBootstrapPath('/tmp/laravel-bootstrap');
+    ->create();
+
+if (PHP_OS_FAMILY === 'Windows') {
+    $app->useStoragePath(dirname(__DIR__) . '/storage');
+    $app->useBootstrapPath(dirname(__DIR__) . '/bootstrap');
+} else {
+    $app->useStoragePath('/tmp/laravel-storage');
+    $app->useBootstrapPath('/tmp/laravel-bootstrap');
+}
+
+return $app;
