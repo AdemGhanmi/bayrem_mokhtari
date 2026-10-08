@@ -6,4 +6,6 @@ $app = require __DIR__ . '/../bootstrap/app.php';
 
 $request = Illuminate\Http\Request::capture();
 
-echo 'REQUEST OK';
+$response = $app->handleRequest($request);
+
+echo 'HANDLE OK';
